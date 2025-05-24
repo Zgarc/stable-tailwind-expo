@@ -1,4 +1,5 @@
-import { onboardingArray } from "@/constants";
+import { onboarding } from "@/constants";
+import { Image } from "expo-image";
 import { router } from "expo-router";
 import { useRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -9,8 +10,10 @@ const Onboarding = () => {
   const swiperRef = useRef<Swiper>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  console.log('Image source:', onboarding[0].image); // Debug log
+
   return (
-    <SafeAreaView className="flex-1 h-full items-center justify-center bg-pink-300">
+    <SafeAreaView className="flex-1 h-full items-center justify-center">
       <TouchableOpacity
         onPress={() => router.replace("/(auth)/sign-up")}
         className="w-full flex justify-end items-end p-5"
@@ -28,10 +31,18 @@ const Onboarding = () => {
         }
         onIndexChanged={(index) => setActiveIndex(index)}
       >
-        {onboardingArray.map((item) => (
-          <View key={item.id} className="flex-1 items-center justify-center">
-            <Text>{item.title}</Text>
-            <Text>{item.description}</Text>
+        {onboarding.map((item) => (
+          <View key={item.id} className="flex items-center justify-center p-5">
+            <View className="w-full h-[300px] bg-gray-100">
+              <Image 
+                source={item.image} 
+                className="w-full h-[350px]"
+                contentFit="cover"
+                transition={0}
+              />
+            </View>
+            <Text className="text-xl font-JakartaBold mt-4">{item.title}</Text>
+            <Text className="text-center text-gray-600 mt-2">{item.description}</Text>
           </View>
         ))}
       </Swiper>

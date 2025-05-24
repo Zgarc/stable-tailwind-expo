@@ -1,10 +1,15 @@
 import { useFonts } from "expo-font";
+import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { cssInterop } from "nativewind";
 import { useCallback } from "react";
 import { View } from "react-native";
 import "react-native-reanimated";
 import "../global.css";
+
+// Register Image component for NativeWind
+cssInterop(Image, { className: "style" });
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
